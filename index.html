@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Psychic-Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />    
+</head>
+
+<body>
+    
+    <h1>The Psychic Game</h1>
+    <div id=game>
+        <p>Guess what letter I'm thinking of</p>
+        <br>
+        <p>Wins: <span id="winner">0</span></p>
+        <br>
+        <p>Losses: <span id="loser">0</span></p>
+        <br>
+        <p>Guesses Left: <span id="guesses-left">9</span></p>
+        <br>
+        <p>Your Guesses so far: <span id="user-text"></span></p>
+    </div>
+
+
+    <script type="text/javascript">
+
+        var computerChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+        var wins = 0;
+        var losses = 0;
+        var guessesLeft = 9;
+        
+        var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+        console.log("Before onkeyup computerGuess: " + computerGuess);
+
+        document.onkeyup = function(event) {
+            // Determine which key was pressed, make it lowercase, and set it to the userInput variable.
+            var userInput = String.fromCharCode(event.which).toLowerCase();
+            console.log("User input: " + userInput);
+
+            if ((userInput === computerGuess)) {
+                wins++;
+                // computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+                // console.log("new letter" + computerGuess)
+                guessesLeft = 9;
+                console.log("Wins: " + wins);     
+            }
+
+            if ((userInput !== computerGuess)) {
+                losses++;
+                console.log("Losses: " + losses);
+                guessesLeft--;
+            }
+            if (guessesLeft < 0) {
+                // computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+                // console.log("new letter" + computerGuess)                
+                guessesLeft = 9;
+                console.log("Guesses left: " + guessesLeft);
+            }            
+            
+            document.getElementById("winner").innerHTML = wins;
+            document.getElementById("loser").innerHTML = losses;
+            document.getElementById("guesses-left").innerHTML = guessesLeft;       
+        };
+        
+    </script>
+</body>
+
+</html>
